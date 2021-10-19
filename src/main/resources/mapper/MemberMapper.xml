@@ -4,4 +4,43 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mapper.MemberMapper">
 
+	<select id="getList" resultType="com.itwillbs.domain.MemberVO">
+	<![CDATA[
+	select * from tbl_board where num > 0
+	]]>
+	</select>
+
+	<insert id="insert">
+		insert into user_board (title,content,writer)
+		values (#{title} #{content}, #{writer})
+	</insert>
+
+<!-- 	<insert id="insertSelectKey"> -->
+	
+<!-- 		<selectKey keyProperty="bno" order="BEFORE" -->
+<!-- 		resultType="long"> -->
+<!-- 		select seq_member.nextval from dual -->
+<!-- 		</selectKey> -->
+		
+<!-- 		insert into tbl_member (mno,title,content,writer) -->
+<!-- 		values(#{mno}, #{title}, #{content},#{writer}) -->
+<!-- 	</insert> -->
+
+	<select id="read" resultType="com.itwillbs.domain.MemberVO">
+		select * from tbl_member where mno = #{mno}
+	</select>
+
+	<delete id="delete">
+		delete from tbl_member where mno = #{mno}
+	</delete>
+	
+	<update id="update">
+		update tbl_member
+		set title = #{title},
+		content = #{content},
+		writer = #{writer},
+		updateDate = sysdate
+		where mno = #{mno}
+	</update>
+	
 </mapper>
